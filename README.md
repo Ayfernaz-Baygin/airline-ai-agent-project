@@ -41,15 +41,21 @@ Users can complete check-in:
 
 # System Architecture
 
-Frontend Chat UI  
-⬇  
-Agent Backend (LLM Decision Layer)  
-⬇  
-MCP Server (Tool Mapping Layer)  
-⬇  
-API Gateway  
-⬇  
+Frontend (React Chat UI)
+⬇
+Agent Backend (Node.js)
+⬇
+LLM (Ollama – Intent & Tool Selection)
+⬇
+MCP Client
+⬇
+MCP Server (Tool Mapping Layer)
+⬇
+API Gateway
+⬇
 Midterm Flight APIs
+
+The MCP server is responsible for mapping high-level tools (query_flights, book_flight, check_in) to actual API Gateway endpoints.
 
 ---
 
@@ -75,6 +81,9 @@ Midterm Flight APIs
 ---
 
 # How It Works
+The LLM is responsible for understanding user intent and selecting the correct tool to execute.
+
+All API calls are strictly routed through the API Gateway as required by the assignment.
 
 1. User sends a message in chat.
 2. Frontend sends the message to Agent Backend.
@@ -92,12 +101,11 @@ Midterm Flight APIs
 
 # Setup Instructions
 
-## 1. Clone Repository
+ 1. Clone Repository
 
 ```bash
 git clone https://github.com/Ayfernaz-Baygin/airline-ai-agent-project.git
 cd airline-ai-agent-project
-
 
 2. Install Dependencies
 
