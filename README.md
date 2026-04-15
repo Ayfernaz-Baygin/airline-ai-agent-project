@@ -1,163 +1,165 @@
- # Airline AI Agent
+ # Airline AI Agent Project
 
-This project is an AI-powered airline assistant that allows users to search flights, book tickets, and perform check-in operations through a chat-based interface.
+SE 4458 – Assignment 2  
+AI Agent Chat Application for Flight Services
 
-It was developed as part of the Software Architecture & Design course (Assignment 2).
+## Project Overview
 
----
+This project is an AI-powered chat application that allows users to interact with airline services using natural language.
 
-## Features
+Users can:
 
-- Natural language chat interface
-- Flight search
-- Ticket booking
-- Passenger check-in
-- AI-powered intent detection
-- MCP (Model Context Protocol) server integration
-- Gateway-based API communication
+- Query Flights
+- Book Flights
+- Check In
 
----
-
-## System Architecture
-The LLM is responsible for understanding user input, extracting intent and parameters, and deciding which tool to invoke. The selected tool is then executed through the MCP server.
-
-The system follows a modular AI agent architecture:
-Frontend (React Chat UI)
-↓
-Agent Backend (Node.js)
-↓
-LLM (Ollama - local model)
-↓
-MCP Client
-↓
-MCP Server
-↓
-API Gateway
-↓
-Airline Backend API (Midterm Project)
-
+The system uses an AI Agent architecture where the LLM understands user intent, selects the correct tool, and communicates with backend APIs through an MCP server and API Gateway.
 
 ---
 
-## Technologies Used
+# Features
 
-### Frontend
+## Query Flights
+Users can search available flights by typing messages like:
+
+- Find flights from Istanbul to Frankfurt on May 10
+- Search flights from IST to FRA
+
+## Book Flight
+Users can book a selected flight:
+
+- Book flight TK1523
+- I want to reserve LH1301
+
+## Check In
+Users can complete check-in:
+
+- Check in for TK1523
+- Check-in with ticket number 74562189
+
+---
+
+# System Architecture
+
+Frontend Chat UI  
+⬇  
+Agent Backend (LLM Decision Layer)  
+⬇  
+MCP Server (Tool Mapping Layer)  
+⬇  
+API Gateway  
+⬇  
+Midterm Flight APIs
+
+---
+
+# Technologies Used
+
+## Frontend
 - React.js
-- Axios
 
-### Backend
+## Backend
 - Node.js
 - Express.js
 
-### AI / LLM
-- Ollama (local LLM)
+## AI / LLM
+- Ollama (Local LLM)
 
-### Integration
-- MCP Server (custom implementation)
+## Tool Layer
+- Custom MCP Server
+
+## API Communication
+- Axios
 - REST APIs
-- API Gateway
 
 ---
 
-## Project Structure
+# How It Works
 
-frontend/ → React chat application
-agent-backend/ → AI agent + LLM integration
-mcp-server/ → MCP server (tool handler)
-
-
----
-
-## Supported Operations
-
-### Flight Search
-Example: Find flights from Istanbul to Ankara for 2 people
-
-### Booking
-Example:
-
-Book flight TK1001 for Ayfernaz Baygın on 2026-03-30
-
-### Check-in
-Example:
-
-Check in Ayfernaz Baygın for flight TK1001 on 2026-03-30
-
+1. User sends a message in chat.
+2. Frontend sends the message to Agent Backend.
+3. Backend asks the LLM to understand user intent.
+4. LLM selects one of the tools:
+   - query_flights
+   - book_flight
+   - check_in
+5. Backend sends tool request to MCP Server.
+6. MCP Server routes request to API Gateway.
+7. Gateway calls Midterm APIs.
+8. Response is shown in chat UI.
 
 ---
 
-## Setup Instructions
+# Setup Instructions
 
-### 1. Clone the repository
+## 1. Clone Repository
 
+```bash
 git clone https://github.com/Ayfernaz-Baygin/airline-ai-agent-project.git
-
 cd airline-ai-agent-project
 
 
----
+2. Install Dependencies
 
-### 2. Install dependencies
-
-## Frontend
-
+Frontend:
 cd frontend
 npm install
-npm start
 
-## Agent Backend
-
-cd agent-backend
+Agent Backend:
+cd ../agent-backend
 npm install
-npm start
 
+MCP Server:
+cd ../mcp-server
+npm install
 
-## MCP Server
+Environment Variables
+Create .env file inside mcp-server:
 
+GATEWAY_BASE_URL=http://localhost:8080
+LOGIN_URL=http://localhost:8080/login
+AUTH_USERNAME=test
+AUTH_PASSWORD=test
+
+Run Project:
+Start Ollama
+ollama run llama3
+
+Start MCP Server:
 cd mcp-server
-npm install
+node server.js
+
+Start Agent Backend:
+cd agent-backend
+node server.js
+
+Start Frontend:
+cd frontend
 npm start
 
+Assumptions:
+Midterm APIs are already implemented and working.
+API Gateway is available.
+Authentication uses constant username/password.
+Ollama is installed locally.
+User enters valid flight or ticket information.
 
----
+Challenges Encountered:
+Parsing natural language into structured parameters
+Handling invalid JSON responses from LLM
+Mapping tools correctly to gateway endpoints
+Connecting multiple services together
+Managing chat UI state dynamically
 
-## Assumptions
+Design Decisions:
+Local LLM used instead of cloud APIs
+MCP layer added for modularity
+Gateway architecture preserved
+React chosen for fast UI development
+Fallback keyword intent detection added for reliability
 
-- The API Gateway is already deployed and accessible
-- The airline backend API (midterm project) is running
-- Ollama is installed and running locally
+Demo Video:
 
----
 
-##  Challenges & Issues
-
-- Handling LLM JSON parsing errors
-- Managing rate limits (initially with OpenAI)
-- Migrating to local LLM (Ollama)
-- Designing MCP server for tool-based architecture
-- Ensuring correct mapping between tools and API endpoints
-- Cleaning sensitive data (API keys, .env files) before GitHub push
-
----
-
-## Demo Video
-
-(Add your video link here)
-
----
-
-## Notes
-
-- All API requests are routed through the API Gateway
-- MCP server handles tool invocation and routing logic
-- The system is designed to be modular and easily extendable
-- MCP server maps high-level tools (query_flights, book_flight, check_in) to actual API Gateway endpoints
-- All API requests strictly go through the API Gateway as required by the assignment
-
- 
-## Design Decisions
-
-- A modular architecture was preferred to separate concerns (frontend, agent, MCP server)
-- MCP layer was introduced to decouple tool logic from the agent
-- Local LLM (Ollama) was used to avoid API rate limits and external dependencies
-- Gateway-based communication ensures scalability and security
+GitHub Repository:
+https://github.com/Ayfernaz-Baygin/airline-ai-agent-project
