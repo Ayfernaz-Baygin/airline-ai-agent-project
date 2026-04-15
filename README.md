@@ -99,9 +99,9 @@ All API calls are strictly routed through the API Gateway as required by the ass
 
 ---
 
-# Setup Instructions
+## Setup Instructions
 
- 1. Clone Repository
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/Ayfernaz-Baygin/airline-ai-agent-project.git
