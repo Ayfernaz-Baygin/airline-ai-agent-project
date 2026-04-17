@@ -101,7 +101,7 @@ All API calls are strictly routed through the API Gateway as required by the ass
 
 ---
 
-```md
+
 ## Setup Instructions
 
 ### 1. Clone Repository
@@ -114,19 +114,23 @@ cd airline-ai-agent-project
 2. Install Dependencies
 
 Frontend:
+
 cd frontend
 npm install
 
 Agent Backend:
+
 cd ../agent-backend
 npm install
 
 MCP Server:
+
 cd ../mcp-server
 npm install
 Environment Variables
 
 Create a .env file inside mcp-server:
+
 GATEWAY_BASE_URL=http://localhost:8080
 LOGIN_URL=http://localhost:8080/login
 AUTH_USERNAME=test
