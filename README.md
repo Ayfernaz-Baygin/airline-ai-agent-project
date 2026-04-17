@@ -106,7 +106,6 @@ All API calls are strictly routed through the API Gateway as required by the ass
 ```bash
 git clone https://github.com/Ayfernaz-Baygin/airline-ai-agent-project.git
 cd airline-ai-agent-project
-
 2. Install Dependencies
 
 Frontend:
