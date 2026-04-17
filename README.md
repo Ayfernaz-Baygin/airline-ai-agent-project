@@ -84,52 +84,63 @@ Backend sends tool request to MCP Server
 MCP Server routes request to API Gateway
 Gateway calls Midterm APIs
 Response is shown in chat UI
+
 Setup Instructions
 1. Clone Repository
 git clone https://github.com/Ayfernaz-Baygin/airline-ai-agent-project.git
 cd airline-ai-agent-project
+
 2. Install Dependencies
 Frontend
 cd frontend
 npm install
+
 Agent Backend
 cd ../agent-backend
 npm install
+
 MCP Server
 cd ../mcp-server
 npm install
+
 Environment Variables
-
 Create a .env file inside mcp-server:
-
 GATEWAY_BASE_URL=http://localhost:8080
 LOGIN_URL=http://localhost:8080/login
 AUTH_USERNAME=test
 AUTH_PASSWORD=test
+
 Run Project
+
 Start Ollama
 ollama run llama3
+
 Start MCP Server
 cd mcp-server
 node server.js
+
 Start Agent Backend
 cd agent-backend
 node server.js
+
 Start Frontend
 cd frontend
 npm start
+
 Assumptions
 Midterm APIs are already implemented and working
 API Gateway is available
 Authentication uses constant username/password
 Ollama is installed locally
 User enters valid flight or ticket information
+
 Challenges Encountered
 Parsing natural language into structured parameters
 Handling invalid JSON responses from LLM
 Mapping tools correctly to gateway endpoints
 Connecting multiple services together
 Managing chat UI state dynamically
+
 Design Decisions
 Local LLM used instead of cloud APIs
 MCP layer added for modularity
